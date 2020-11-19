@@ -9,20 +9,21 @@
     <app-date-picker (eventHandler)="saveDate($event)"></app-date-picker>
     <hr />
     <button class="btn btn-primary" (click)="getDayWorkedTime()">Oblicz czas pracy</button>
-    <h3>Przepracowano {{dayWorkedTime.hour}} godzin i {{dayWorkedTime.minute}} minut.</h3>
+    <h3 *ngIf="isDayWorkedTimeCorrect">Przepracowano {{dayWorkedTime.hour}} godzin i {{dayWorkedTime.minute}} minut.</h3>
+    <h3 *ngIf="!(isDayWorkedTimeCorrect)">Wprowadzono błędny czas pracy.</h3>
   </div>
   <div class="col-sm mx-auto">
     <app-time-picker (eventHandler)="saveTime($event)" [disableStartTime]="notStartedTodayInput" [disableFinishTime]="notFinishedTodayInput"></app-time-picker>
     <div class="row">
       <div class="col-sm checkbox-1">
-        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" [(ngModel)]="notStartedTodayInput">
+        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" [(ngModel)]="notStartedTodayInput" (change)="onStartedChecked()">
         <label class="form-check-label" for="defaultCheck1">
           Nie rozpocząłem pracy w tym dniu
         </label>
       </div>
       <div class="col-sm checkbox-2">
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" [(ngModel)]="notFinishedTodayInput">
+          <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" [(ngModel)]="notFinishedTodayInput" (change)="onFinishedChecked()">
           <label class="form-check-label" for="defaultCheck2">
             Nie zakończyłem pracy w tym dniu
           </label>

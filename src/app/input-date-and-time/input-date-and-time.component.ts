@@ -12,17 +12,46 @@ export class InputDateAndTimeComponent implements OnInit {
   timeOfFinish: number = 1260;
   inputedDate: Date;
 
+  timeOfStartHolder: number;
+  timeOfFinishHolder: number;
+
   notStartedTodayInput: boolean = false;
   notFinishedTodayInput: boolean = false;
 
   dayWorkedTime: { hour: number, minute: number } = { hour: 0, minute: 0 };
+  isDayWorkedTimeCorrect: boolean = true;
 
   ngOnInit(): void {
   }
 
+  onStartedChecked() {
+    if (this.notStartedTodayInput) {
+      this.timeOfStartHolder = this.timeOfStart;
+      this.timeOfStart = 0;
+    }
+    else if ((!(this.notStartedTodayInput)) && (this.timeOfStartHolder !== null)) {
+      this.timeOfStart = this.timeOfStartHolder;
+    }
+  }
+
+  onFinishedChecked() {
+    if (this.notFinishedTodayInput) {
+      this.timeOfFinishHolder = this.timeOfFinish;
+      this.timeOfFinish = 1440;
+    }
+    else if ((!(this.notFinishedTodayInput)) && (this.timeOfFinishHolder !== null)) {
+      this.timeOfFinish = this.timeOfFinishHolder;
+    }
+  }
+
   saveTime(timeHolder: { timeOfStart: { hour: number, minute: number }, timeOfFinish: { hour: number, minute: number } }) {
     this.timeOfStart = this.toMinutesOnly(timeHolder.timeOfStart);
-    this.timeOfFinish = this.toMinutesOnly(timeHolder.timeOfFinish);
+    if ((timeHolder.timeOfFinish.minute == 0) && (timeHolder.timeOfFinish.hour == 0)) {
+      this.timeOfFinish = 1440;
+    }
+    else {
+      this.timeOfFinish = this.toMinutesOnly(timeHolder.timeOfFinish);
+    }    
   }
 
   saveDate(dateHolder: Date) {
@@ -42,6 +71,9 @@ export class InputDateAndTimeComponent implements OnInit {
 
   getDayWorkedTime() {
     this.dayWorkedTime = this.toNormalTime(this.timeOfFinish - this.timeOfStart);
+    if ((this.timeOfFinish - this.timeOfStart) < 0) {
+      this.isDayWorkedTimeCorrect = false;
+    }
   }
 
 }
