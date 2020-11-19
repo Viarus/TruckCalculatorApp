@@ -4,3 +4,14 @@
 .checkbox-2 {
   margin-right: 16px;
 }
+.under-button-label {
+  font-size: 13px;
+  font-style: italic;
+  font-family: roboto;
+  margin-left: 70px;
+}
+.btn-margin-top-bot{
+    margin-left: 50px;
+    margin-top: 35px;
+    margin-bottom: 10px;
+}
