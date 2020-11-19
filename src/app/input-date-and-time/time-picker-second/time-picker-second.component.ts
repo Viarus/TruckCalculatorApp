@@ -1,11 +1,11 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-time-picker',
-  templateUrl: './time-picker.component.html',
-  styleUrls: ['./time-picker.component.css']
+  selector: 'app-time-picker-second',
+  templateUrl: './time-picker-second.component.html',
+  styleUrls: ['./time-picker-second.component.css']
 })
-export class TimePickerComponent{
+export class TimePickerSecondComponent {
   timeOfStart = { hour: 0, minute: 0 };
   timeOfFinish = { hour: 21, minute: 0 };
 
@@ -18,5 +18,4 @@ export class TimePickerComponent{
   onChange() {
     this.eventHandler.emit({ timeOfStart: this.timeOfStart, timeOfFinish: this.timeOfFinish });
   }
-
 }

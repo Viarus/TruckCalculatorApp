@@ -12,6 +12,7 @@ import { GraphComponent } from './output-data/graph/graph.component';
 import { TextComponent } from './input-date-and-time/text/text.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { TimePickerSecondComponent } from './input-date-and-time/time-picker-second/time-picker-second.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { FormsModule } from '@angular/forms';
     TimePickerComponent,
     OutputDataComponent,
     GraphComponent,
-    TextComponent
+    TextComponent,
+    TimePickerSecondComponent
   ],
   imports: [
     BrowserModule,

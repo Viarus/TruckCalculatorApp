@@ -18,8 +18,21 @@ export class InputDateAndTimeComponent implements OnInit {
   notStartedTodayInput: boolean = false;
   notFinishedTodayInput: boolean = false;
 
+  notFinishedTodayInput2: boolean = false;
+
+  timeOfStart2 = 0;
+  timeOfFinish2 = 1260;
+
+  timeOfStartHolder2: number;
+  timeOfFinishHolder2: number;
+
   dayWorkedTime: { hour: number, minute: number } = { hour: 0, minute: 0 };
+  dayWorkedTime2: { hour: number, minute: number } = { hour: 0, minute: 0 };
   isDayWorkedTimeCorrect: boolean = true;
+  isDayWorkedTimeCorrect2: boolean = true;
+
+  showNewTimeRange: boolean = false;
+  showNewTimeRangeButton: boolean = true;
 
   ngOnInit(): void {
   }
@@ -44,6 +57,16 @@ export class InputDateAndTimeComponent implements OnInit {
     }
   }
 
+  onFinishedChecked2() {
+    if (this.notFinishedTodayInput2) {
+      this.timeOfFinishHolder2 = this.timeOfFinish2;
+      this.timeOfFinish2 = 1440;
+    }
+    else if ((!(this.notFinishedTodayInput)) && (this.timeOfFinishHolder !== null)) {
+      this.timeOfFinish2 = this.timeOfFinishHolder2;
+    }
+  }
+
   saveTime(timeHolder: { timeOfStart: { hour: number, minute: number }, timeOfFinish: { hour: number, minute: number } }) {
     this.timeOfStart = this.toMinutesOnly(timeHolder.timeOfStart);
     if ((timeHolder.timeOfFinish.minute == 0) && (timeHolder.timeOfFinish.hour == 0)) {
@@ -51,7 +74,26 @@ export class InputDateAndTimeComponent implements OnInit {
     }
     else {
       this.timeOfFinish = this.toMinutesOnly(timeHolder.timeOfFinish);
-    }    
+    }
+    if (this.notFinishedTodayInput) {
+      this.timeOfFinish = 1440;
+    }
+    else if (this.notStartedTodayInput) {
+      this.timeOfStart = 0;
+    }
+  }
+
+  saveTime2(timeHolder: { timeOfStart: { hour: number, minute: number }, timeOfFinish: { hour: number, minute: number } }) {
+    this.timeOfStart2 = this.toMinutesOnly(timeHolder.timeOfStart);
+    if ((timeHolder.timeOfFinish.minute == 0) && (timeHolder.timeOfFinish.hour == 0)) {
+      this.timeOfFinish2 = 1440;
+    }
+    else {
+      this.timeOfFinish2 = this.toMinutesOnly(timeHolder.timeOfFinish);
+    }
+    if (this.notFinishedTodayInput2) {
+      this.timeOfFinish2 = 1440;
+    }
   }
 
   saveDate(dateHolder: Date) {
@@ -74,6 +116,32 @@ export class InputDateAndTimeComponent implements OnInit {
     if ((this.timeOfFinish - this.timeOfStart) < 0) {
       this.isDayWorkedTimeCorrect = false;
     }
+    else {
+      this.isDayWorkedTimeCorrect = true;
+    }
+    if (this.showNewTimeRange) {
+      this.getDayWorkedTime2();
+    }
+  }
+
+  getDayWorkedTime2() {
+    this.dayWorkedTime2 = this.toNormalTime(this.timeOfFinish2 - this.timeOfStart2);
+    if ((this.timeOfFinish2 - this.timeOfStart2) < 0) {
+      this.isDayWorkedTimeCorrect2 = false;
+    }
+    else {
+      this.isDayWorkedTimeCorrect2 = true;
+    }
+  }
+
+  onShowNewTimeRange() {
+    this.showNewTimeRange = true;
+    this.showNewTimeRangeButton = false;
+  }
+
+  onHideNewTimeRange() {
+    this.showNewTimeRange = false;
+    this.showNewTimeRangeButton = true;
   }
 
 }
