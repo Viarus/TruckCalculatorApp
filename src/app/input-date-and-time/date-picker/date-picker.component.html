@@ -1,0 +1,6 @@
+<mat-form-field appearance="fill" color="">
+  <mat-label>Wybierz dzień</mat-label>
+  <input matInput [matDatepicker]="picker2" (dateInput)="onDateInput($event)">
+  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+  <mat-datepicker #picker2 color="primary"></mat-datepicker>
+</mat-form-field>

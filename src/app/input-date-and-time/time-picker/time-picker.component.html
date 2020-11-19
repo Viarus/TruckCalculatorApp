@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-sm">
+    <ngb-timepicker [(ngModel)]="timeOfStart" (click)="onChange()" *ngIf="(!disableStartTime)"></ngb-timepicker>
+    <div class="timeMarginTop" *ngIf="disableStartTime">
+      <span class="disabledStartingTimeHours timeBorder timeSize">00</span>
+      <span class="colonTime timeSize">:</span>
+      <span class="disabledStartingTimeMinutes timeBorder timeSize">00</span>
+      <br />
+      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-lock-fill lock-margins" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2.5 9a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2V9z" />
+        <path fill-rule="evenodd" d="M4.5 4a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z" />
+      </svg>
+    </div>
+  </div>
+  <div class="col-sm">
+    <ngb-timepicker [(ngModel)]="timeOfFinish" (click)="onChange()"></ngb-timepicker>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm">
+    <h3>Czas rozpoczęcia</h3>
+  </div>
+  <div class="col-sm">
+    <h3>Czas zakończenia</h3>
+  </div>
+</div>
