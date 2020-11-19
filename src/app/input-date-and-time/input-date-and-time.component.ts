@@ -8,6 +8,12 @@ import { Component, OnInit } from '@angular/core';
 export class InputDateAndTimeComponent implements OnInit {
   constructor() { }
 
+  //morningStartOfWork: { hour: number, minute: number };
+  //morningFinishOfWork: { hour: number, minute: number };
+
+  //afternoonStartOfWork: { hour: number, minute: number };
+  //afternoonFinishOfWork: { hour: number, minute: number };
+
   timeOfStart: number = 0;
   timeOfFinish: number = 1260;
   inputedDate: Date;
@@ -84,6 +90,7 @@ export class InputDateAndTimeComponent implements OnInit {
   }
 
   saveTime2(timeHolder: { timeOfStart: { hour: number, minute: number }, timeOfFinish: { hour: number, minute: number } }) {
+    this.isDayWorkedTimeCorrect2 = true;
     this.timeOfStart2 = this.toMinutesOnly(timeHolder.timeOfStart);
     if ((timeHolder.timeOfFinish.minute == 0) && (timeHolder.timeOfFinish.hour == 0)) {
       this.timeOfFinish2 = 1440;
@@ -125,12 +132,18 @@ export class InputDateAndTimeComponent implements OnInit {
   }
 
   getDayWorkedTime2() {
-    this.dayWorkedTime2 = this.toNormalTime(this.timeOfFinish2 - this.timeOfStart2);
-    if ((this.timeOfFinish2 - this.timeOfStart2) < 0) {
+    if ((this.timeOfStart > this.timeOfStart2) || (this.timeOfStart2 < this.timeOfFinish)) {
       this.isDayWorkedTimeCorrect2 = false;
     }
     else {
       this.isDayWorkedTimeCorrect2 = true;
+      this.dayWorkedTime2 = this.toNormalTime(this.timeOfFinish2 - this.timeOfStart2);
+      if ((this.timeOfFinish2 - this.timeOfStart2) < 0) {
+        this.isDayWorkedTimeCorrect2 = false;
+      }
+      else {
+        this.isDayWorkedTimeCorrect2 = true;
+      }
     }
   }
 

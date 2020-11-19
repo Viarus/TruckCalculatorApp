@@ -35,7 +35,7 @@
     </div>
 
     <div class="row" *ngIf="showNewTimeRangeButton">
-      <button class="btn btn-success btn-margin-top-bot" (click)="onShowNewTimeRange()">Dodaj drugi przedział czasowy*</button>
+      <button class="btn btn-success btn-margin-top-bot" (click)="onShowNewTimeRange()" [disabled]="notFinishedTodayInput">Dodaj drugi przedział czasowy*</button>
       <label class="under-button-label">*Jeżeli skończyłeś pracę rano, <br /> i po pauzie zacząłeś nowy czas pracy <br /> jeszcze tego samego dnia.</label>
     </div>
 
@@ -63,5 +63,8 @@
 </div>
 {{notStartedTodayInput}}
 {{notFinishedTodayInput}}
-{{timeOfFinish}}
-{{timeOfStart}}
+tf1--{{timeOfFinish}}--
+ts1--{{timeOfStart}}--
+
+tf2--{{timeOfFinish2}}--
+ts2--{{timeOfStart2}}
