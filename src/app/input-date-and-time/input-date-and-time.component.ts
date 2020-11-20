@@ -14,6 +14,9 @@ export class InputDateAndTimeComponent implements OnInit {
   //afternoonStartOfWork: { hour: number, minute: number };
   //afternoonFinishOfWork: { hour: number, minute: number };
 
+  //Ważne!! Gdy zaczniesz exportować dane dalej, to pamiętaj, żeby
+  //nie przesyłać timeOfStart2 i timeOfFinish2 , gdy showNewTimeRange == false
+
   timeOfStart: number = 0;
   timeOfFinish: number = 1260;
   inputedDate: Date;

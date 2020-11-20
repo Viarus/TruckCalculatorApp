@@ -21,12 +21,12 @@
       <div class="col-sm checkbox-1">
         <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" [(ngModel)]="notStartedTodayInput" (change)="onStartedChecked()" [disabled]="notFinishedTodayInput">
         <label class="form-check-label" for="defaultCheck1">
-          Nie rozpocząłem pracy w tym dniu
+          Nie rozpocząłem <br /> pracy w tym dniu
         </label>
       </div>
       <div class="col-sm checkbox-2">
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" [(ngModel)]="notFinishedTodayInput" (change)="onFinishedChecked()" [disabled]="notStartedTodayInput">
+          <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" [(ngModel)]="notFinishedTodayInput" (change)="onFinishedChecked()" [disabled]="notStartedTodayInput || showNewTimeRange">
           <label class="form-check-label" for="defaultCheck2">
             Nie zakończyłem pracy w tym dniu
           </label>
@@ -45,7 +45,7 @@
         <div class="col-sm checkbox-1">
           <input class="form-check-input" type="checkbox" value="" id="defaultCheck3" [disabled]="true">
           <label class="form-check-label" for="defaultCheck3">
-            Nie rozpocząłem pracy w tym dniu
+            Nie rozpocząłem <br /> pracy w tym dniu
           </label>
         </div>
         <div class="col-sm checkbox-2">
