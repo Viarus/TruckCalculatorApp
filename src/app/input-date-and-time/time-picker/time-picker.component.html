@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-sm">
-    <ngb-timepicker [(ngModel)]="timeOfStart" (click)="onChange()" *ngIf="(!disableStartTime)"></ngb-timepicker>
+    <ngb-timepicker [(ngModel)]="timeOfStart" (click)="ngDoCheck()" *ngIf="(!disableStartTime)"></ngb-timepicker>
     <div class="timeMarginTop" *ngIf="disableStartTime">
       <span class="disabledStartingTimeHours timeBorder timeSize">00</span>
       <span class="colonTime timeSize">:</span>

@@ -1,12 +1,6 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\src",
-    "\\src\\app",
-    "\\src\\app\\input-date-and-time",
-    "\\src\\app\\input-date-and-time\\time-picker-second",
-    "\\src\\assets\\img"
+    ""
   ],
-  "SelectedNode": "\\src\\app\\input-date-and-time\\input-date-and-time.component.ts",
   "PreviewInSolutionExplorer": false
 }

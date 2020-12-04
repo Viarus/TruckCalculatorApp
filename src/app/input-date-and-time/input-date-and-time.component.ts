@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-input-date-and-time',
@@ -6,13 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./input-date-and-time.component.css']
 })
 export class InputDateAndTimeComponent implements OnInit {
-  constructor() { }
-
-  //morningStartOfWork: { hour: number, minute: number };
-  //morningFinishOfWork: { hour: number, minute: number };
-
-  //afternoonStartOfWork: { hour: number, minute: number };
-  //afternoonFinishOfWork: { hour: number, minute: number };
+  constructor(private http: HttpClient) { }
 
   //Ważne!! Gdy zaczniesz exportować dane dalej, to pamiętaj, żeby
   //nie przesyłać timeOfStart2 i timeOfFinish2 , gdy showNewTimeRange == false
@@ -42,6 +37,9 @@ export class InputDateAndTimeComponent implements OnInit {
 
   showNewTimeRange: boolean = false;
   showNewTimeRangeButton: boolean = true;
+
+  dataToBePostedMorning: { TimeOfStart: number, TimeOfFinish: number, AddAfternoonTime: boolean } = { TimeOfStart: this.timeOfStart, TimeOfFinish: this.timeOfFinish, AddAfternoonTime: this.showNewTimeRange };
+  dataToBePostedAfternoon: { timeOfStart: number, timeOfFinish: number} = { timeOfStart: this.timeOfStart2, timeOfFinish: this.timeOfFinish2 };
 
   ngOnInit(): void {
   }
@@ -121,17 +119,19 @@ export class InputDateAndTimeComponent implements OnInit {
     return time;
   }
 
-  getDayWorkedTime() {
-    this.dayWorkedTime = this.toNormalTime(this.timeOfFinish - this.timeOfStart);
+  getDayWorkedTime() {    
     if ((this.timeOfFinish - this.timeOfStart) < 0) {
       this.isDayWorkedTimeCorrect = false;
     }
     else {
+      this.dayWorkedTime = this.toNormalTime(this.timeOfFinish - this.timeOfStart);
       this.isDayWorkedTimeCorrect = true;
-    }
-    if (this.showNewTimeRange) {
-      this.getDayWorkedTime2();
-    }
+      this.http.post('https://localhost:44396/api/values', this.dataToBePostedMorning).subscribe();
+      //this.http.post('https://testfortruckapp-default-rtdb.firebaseio.com/posts.json', this.dataToBePostedMorning).subscribe();
+      if (this.showNewTimeRange) {
+        this.getDayWorkedTime2();
+      }
+    }    
   }
 
   getDayWorkedTime2() {
@@ -146,6 +146,7 @@ export class InputDateAndTimeComponent implements OnInit {
       }
       else {
         this.isDayWorkedTimeCorrect2 = true;
+        this.http.post('https://localhost:44396/api/values', this.dataToBePostedAfternoon).subscribe();
       }
     }
   }
